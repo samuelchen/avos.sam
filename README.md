@@ -1,1 +1,3 @@
-Cloud code project for sam.avosapps.com on https://cn.avoscloud.com
+avos.sam
+========
+Cloud code project for http://sam.avosapps.com 
