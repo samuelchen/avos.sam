@@ -1,4 +1,1 @@
-avos.sam
-========
-
-a test site on avos
+Cloud code project for sam.avosapps.com on https://cn.avoscloud.com
