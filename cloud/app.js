@@ -1,9 +1,13 @@
 // 在Cloud code里初始化express框架
 var express = require('express');
 var app = express();
+var name = require('cloud/name.js');
 
 // App全局配置
-app.set('views','cloud/views');   //设置模板目录
+if (__production)
+    app.set('views','cloud/views');   //设置模板目录
+else
+    app.set('views','cloud/_views');
 app.set('view engine', 'ejs');    // 设置template引擎
 app.use(express.bodyParser());    // 读取请求body的中间件
 
