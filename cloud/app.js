@@ -1,9 +1,8 @@
 // 在Cloud code里初始化express框架
 var express = require('express');
 var app = express();
-var logger = require(__dirname + '/logger');
-//var name = require('cloud/name.js');
 var path = require ('path');
+var logger = require('cloud/logger.js');
 
 logger.info('----- Application Started -----');
 
