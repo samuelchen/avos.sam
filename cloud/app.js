@@ -1,7 +1,7 @@
 // 在Cloud code里初始化express框架
 var express = require('express');
 var app = express();
-var path = require ('path');
+//var path = require ('path');
 var logger = require('cloud/logger.js');
 
 logger.info('----- Application Started -----');
@@ -11,7 +11,7 @@ if (typeof(__production) == 'undefined') {
     logger.debug('local env');
     logger.debug(__dirname);
     app.set('views',__dirname + '/views');   //设置模板目录
-    app.use(express.static(path.join(__dirname + '/../public')));
+    //app.use(express.static(path.join(__dirname + '/../public')));
 } else {
 // App全局配置
     if (__production)
