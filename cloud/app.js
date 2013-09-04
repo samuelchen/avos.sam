@@ -21,6 +21,7 @@ try {
     //tool.dump_err(err);
     logger = require('util');
     logger.warn = logger.error;
+    logger.info = logger.log;
 }
 
 logger.info('----- Application Started -----');
