@@ -5,6 +5,7 @@ var logger, tool;
 var LOCAL_ENV = false;
 var approot = '';
 //var path = require ('path');
+var http = require('http');
 
 if (typeof(__production) == 'undefined') {
     LOCAL_ENV = true;
@@ -54,6 +55,19 @@ app.get('/1/wx', function(req, res) {
     }
     logger.warn(req);
 */
+    // loggly url :  'https://logs.loggly.com/inputs/f34e25fa-996c-4feb-a310-2dcd32a455b9';
+    var options = {
+      hostname: 'logs.loggly.com',
+      port: 443,
+      path: '/inputs/f34e25fa-996c-4feb-a310-2dcd32a455b9',
+      method: 'POST'
+    };
+    if (!LOCAL_ENV) {
+        http.request(options, function(cli_res){
+            // do nothing.
+        }); 
+        
+    }
     res.render('hello', { message: msg });
 });
 
