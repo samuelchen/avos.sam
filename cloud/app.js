@@ -47,7 +47,7 @@ app.get('/hello', function(req, res) {
 });
 app.get('/1/wx', function(req, res) {
     var msg = '';
-    msg = req.path;
+    msg = req.query.echostr;
 /*
     for (var i=0; i<req.params.length;i++) {
         msg = msg + '\r\n' + req.params[i];
