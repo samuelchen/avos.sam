@@ -18,7 +18,7 @@ try {
     tool = require(approot + './tool');
     logger = require(approot + './logger');
 } catch(err) {
-    tool.dumpError(err);
+    tool.dump_err(err);
     logger = require('util');
     logger.warn = logger.error;
 }

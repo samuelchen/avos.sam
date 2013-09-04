@@ -1,4 +1,5 @@
 *.log
 a.js
 node_modules
+push.sh
 
