@@ -1,5 +1,5 @@
 var tool = ({ 
-dumpError : function dumpError(err) {
+dumpError : function (err) {
   if (typeof err === 'object') {
     if (err.message) {
       console.log('\nMessage: ' + err.message)
