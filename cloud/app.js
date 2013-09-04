@@ -18,7 +18,6 @@ try {
     tool = require(approot + './tool');
     logger = require(approot + './logger');
 } catch(err) {
-    //tool.dump_err(err);
     logger = require('util');
     logger.warn = logger.error;
     logger.info = logger.log;
@@ -47,12 +46,19 @@ app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
 app.get('/1/wx', function(req, res) {
-    var msg = '' + req.toString();
+    var msg = '';
+    msg = req.path;
+/*
+    for (var i=0; i<req.params.length;i++) {
+        msg = msg + '\r\n' + req.params[i];
+    }
     logger.warn(req);
+*/
     res.render('hello', { message: msg });
 });
 
 //最后，必须有这行代码来使express响应http请求
-var port = 8080
+var port = 80;
+if (LOCAL_ENV) port = 8080;
 app.listen(port);
 logger.info('----- Server started on port %d -----', port);
