@@ -1,24 +1,35 @@
 // 在Cloud code里初始化express框架
 var express = require('express');
 var app = express();
+var logger;
+var LOCAL_ENV = false;
+var approot = '';
 //var path = require ('path');
-var logger = require('cloud/logger.js');
 
+if (typeof(__production) == 'undefined') {
+    LOCAL_ENV = true;
+    __production = false;
+    approot = __dirname + '/';
+} else {
+    approot = 'cloud/';
+}
+
+logger = require(approot + './logger.js');
 logger.info('----- Application Started -----');
 
 // 本地设置
-if (typeof(__production) == 'undefined') {
-    logger.debug('local env');
-    logger.debug(__dirname);
-    app.set('views',__dirname + '/views');   //设置模板目录
-    //app.use(express.static(path.join(__dirname + '/../public')));
-} else {
+if (LOCAL_ENV) {
+    logger.debug('running in LOCAL ENV.');
+    logger.debug(approot);
+    app.use(express.static(approot + '../public'));
+} 
+
 // App全局配置
-    if (__production)
-        app.set('views','cloud/views');   //设置模板目录
-    else
-        app.set('views','cloud/_views');
-}
+if (__production)
+    app.set('views',approot + 'views');   //设置模板目录
+else
+    app.set('views',approot + '_views');
+
 app.set('view engine', 'ejs');    // 设置template引擎
 app.use(express.bodyParser());    // 读取请求body的中间件
 
