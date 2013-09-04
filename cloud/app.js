@@ -1,7 +1,7 @@
 // 在Cloud code里初始化express框架
 var express = require('express');
 var app = express();
-var logger;
+var logger, tool;
 var LOCAL_ENV = false;
 var approot = '';
 //var path = require ('path');
@@ -14,7 +14,15 @@ if (typeof(__production) == 'undefined') {
     approot = 'cloud/';
 }
 
-logger = require(approot + './logger.js');
+try {
+    tool = require(approot + './tool');
+    logger = require(approot + './logger');
+} catch(err) {
+    tool.dumpError(err);
+    logger = require('util');
+    logger.warn = logger.error;
+}
+
 logger.info('----- Application Started -----');
 
 // 本地设置

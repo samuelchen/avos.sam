@@ -1,5 +1,5 @@
-var winston = require('../node_modules/winston');
-require('../node_modules/winston-loggly');
+var winston = require('winston');
+require('winston-loggly');
 
 var logger = new (winston.Logger)({
   transports: [

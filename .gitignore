@@ -1,2 +1,4 @@
 *.log
 a.js
+node_modules
+
