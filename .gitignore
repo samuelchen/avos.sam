@@ -1,4 +1,5 @@
 *.log
+*.bak
 a.js
 node_modules
 push.sh
