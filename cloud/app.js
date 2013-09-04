@@ -45,7 +45,7 @@ app.use(express.bodyParser());    // 读取请求body的中间件
 app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
-app.get('/1/wx', function(req, res) {
+app.post('/1/wx', function(req, res) {
     logger.info ('>>> Entering /1/wx router <<<');
     logger.info(req);
     var msg = '';
