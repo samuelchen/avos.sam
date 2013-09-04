@@ -47,6 +47,7 @@ app.get('/hello', function(req, res) {
 });
 app.get('/1/wx', function(req, res) {
     logger.info ('>>> Entering /1/wx router <<<');
+    logger.info(req);
     var msg = '';
     msg = req.body;
     logger.info (msg);
