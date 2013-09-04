@@ -18,9 +18,9 @@ try {
     tool = require(approot + './tool');
     logger = require(approot + './logger');
 } catch(err) {
-    logger = require('util');
-    logger.warn = logger.error;
-    logger.info = logger.log;
+    logger = console;
+    logger.debug = logger.info;
+    logger.log = logger.info;
 }
 
 logger.info('----- Application Started -----');
@@ -48,12 +48,8 @@ app.get('/hello', function(req, res) {
 app.get('/1/wx', function(req, res) {
     var msg = '';
     msg = req.body;
-/*
-    for (var i=0; i<req.params.length;i++) {
-        msg = msg + '\r\n' + req.params[i];
-    }
-    logger.warn(req);
-*/
+    logger.info (req.body);
+
     var loggly_url = 'https://logs.loggly.com/inputs/f34e25fa-996c-4feb-a310-2dcd32a455b9';
     /*
     var options = {
@@ -62,7 +58,7 @@ app.get('/1/wx', function(req, res) {
       path: '/inputs/f34e25fa-996c-4feb-a310-2dcd32a455b9',
       method: 'POST'
     };
-    */
+    
     if (!LOCAL_ENV) {
         AV.Cloud.httpRequest({
           method: 'POST',
@@ -87,7 +83,6 @@ app.get('/1/wx', function(req, res) {
         cli.write(msg);
         cli.end();
     */    
-    }
     res.render('hello', { message: msg });
 });
 
