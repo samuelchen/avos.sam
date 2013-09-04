@@ -48,7 +48,7 @@ app.get('/hello', function(req, res) {
 });
 app.get('/1/wx', function(req, res) {
     var msg = '';
-    msg = req.query.echostr;
+    msg = req.body;
 /*
     for (var i=0; i<req.params.length;i++) {
         msg = msg + '\r\n' + req.params[i];
@@ -63,9 +63,12 @@ app.get('/1/wx', function(req, res) {
       method: 'POST'
     };
     if (!LOCAL_ENV) {
-        http.request(options, function(cli_res){
+        var cli = http.request(options, function(cli_res){
             // do nothing.
         }); 
+
+        cli.write(msg);
+        cli.end();
         
     }
     res.render('hello', { message: msg });
