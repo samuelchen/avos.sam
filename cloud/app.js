@@ -46,9 +46,10 @@ app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
 app.get('/1/wx', function(req, res) {
+    logger.info ('>>> Entering /1/wx router <<<');
     var msg = '';
     msg = req.body;
-    logger.info (req.body);
+    logger.info (msg);
 
     var loggly_url = 'https://logs.loggly.com/inputs/f34e25fa-996c-4feb-a310-2dcd32a455b9';
     /*
