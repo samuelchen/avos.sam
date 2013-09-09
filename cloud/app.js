@@ -5,6 +5,8 @@ var logger, tool;
 var LOCAL_ENV = false;
 var approot = '';
 //var path = require ('path');
+var WECHAT_TOKEN = 'WXTOKEN_GYG7yr72d';
+var wechat = require('wechat');
 
 if (typeof(__production) == 'undefined') {
     LOCAL_ENV = true;
@@ -40,11 +42,28 @@ else
 
 app.set('view engine', 'ejs');    // 设置template引擎
 app.use(express.bodyParser());    // 读取请求body的中间件
+app.use(express.logger());
 
 //使用express路由API服务/hello的http GET请求
 app.get('/hello', function(req, res) {
     res.render('hello', { message: 'Congrats, you just set up your app!' });
 });
+
+app.use(express.query());
+app.use('/1/wx', wechat(WECHAT_TOKEN, function (req, res, next) {
+    logger.info ('>>> Entering /1/wx router <<<');
+    if (typeof req.weixin == 'undefined')
+        return;
+    var msg = req.weixin;
+    logger.info(msg.ToUserName);
+    logger.info(msg.FromUserName);
+    logger.info(msg.Content);
+    logger.info(msg.CreateTime);
+    logger.info(msg.MessageType);
+    logger.info(msg.MessageID);
+    res.rely('haha');
+}))
+/*
 app.post('/1/wx', function(req, res) {
     logger.info ('>>> Entering /1/wx router <<<');
     logger.info(req);
@@ -84,12 +103,12 @@ app.post('/1/wx', function(req, res) {
 
         cli.write(msg);
         cli.end();
-    */    
+    //* /    
     res.render('hello', { message: msg });
 });
-
+*/
 //最后，必须有这行代码来使express响应http请求
 var port = 80;
 if (LOCAL_ENV) port = 8080;
 app.listen(port);
-logger.info('----- Server started on port %d -----', port);
+logger.info('----- Server is running at port %d -----', port);
